@@ -1,9 +1,13 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';
 import scanRoutes from './routes/scanRoutes.js';
 import { connectDB } from './config/db.js';
+import { loadEnv } from './config/env.js';
+
+import dotenv from 'dotenv';
+
+loadEnv();
 
 dotenv.config();
 

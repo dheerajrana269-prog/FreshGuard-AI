@@ -77,6 +77,13 @@ npm run dev
 ```bash
 cd backend
 npm install
+cp .env.example .env
+npm run dev
+```
+
+If you run the backend from the repository root, env loading still works because the server now resolves `backend/.env` explicitly.
+
+
 npm run dev
 ```
 
@@ -87,6 +94,11 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+**Single-line command:**
+```bash
+cd ai-service && python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### 4) Seed Dataset / Fruit Info
@@ -125,3 +137,11 @@ Replace `ai-service/app/model.py` placeholder with:
 - Rule/model-based shelf-life estimator
 
 Current service keeps a stable contract while allowing model swaps without backend/frontend changes.
+
+
+## Troubleshooting
+
+- **MongooseError: `uri` parameter must be a string (undefined)**
+  - Ensure `backend/.env` exists (`cp backend/.env.example backend/.env`).
+  - Set a valid `MONGO_URI` in `backend/.env`.
+  - Restart backend after updating env values.

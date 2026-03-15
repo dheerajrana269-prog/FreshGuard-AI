@@ -1,6 +1,11 @@
+import { connectDB } from '../config/db.js';
+import Fruit from '../models/Fruit.js';
+import { loadEnv } from '../config/env.js';
+
 import dotenv from 'dotenv';
 import { connectDB } from '../config/db.js';
 import Fruit from '../models/Fruit.js';
+loadEnv();
 
 dotenv.config();
 
