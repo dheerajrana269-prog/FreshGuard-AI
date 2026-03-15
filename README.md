@@ -145,3 +145,13 @@ Current service keeps a stable contract while allowing model swaps without backe
   - Ensure `backend/.env` exists (`cp backend/.env.example backend/.env`).
   - Set a valid `MONGO_URI` in `backend/.env`.
   - Restart backend after updating env values.
+
+- **MongooseServerSelectionError / Atlas TLS or whitelist issues**
+  - Add your current IP in Atlas **Network Access** (or temporarily allow `0.0.0.0/0` for testing).
+  - Verify DB username/password in `MONGO_URI`.
+  - Confirm Atlas cluster status is healthy.
+  - If your network blocks TLS, try another network or disable SSL interception.
+  - Optional: start backend in degraded mode for non-DB endpoint checks:
+    ```bash
+    cd backend && SKIP_DB_CONNECT=true npm run dev
+    ```

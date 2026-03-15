@@ -5,11 +5,7 @@ import scanRoutes from './routes/scanRoutes.js';
 import { connectDB } from './config/db.js';
 import { loadEnv } from './config/env.js';
 
-import dotenv from 'dotenv';
-
 loadEnv();
-
-dotenv.config();
 
 const app = express();
 app.use(cors());
@@ -25,6 +21,21 @@ app.use((err, req, res, next) => {
 });
 
 const port = process.env.PORT || 5000;
-connectDB().then(() => {
+
+const startServer = async () => {
+  const skipDb = String(process.env.SKIP_DB_CONNECT || '').toLowerCase() === 'true';
+
+  if (!skipDb) {
+    await connectDB();
+  } else {
+    console.warn('SKIP_DB_CONNECT=true -> starting API without MongoDB connection. DB-backed routes will fail until DB is available.');
+  }
+
   app.listen(port, () => console.log(`Backend running on ${port}`));
+};
+
+startServer().catch((error) => {
+  console.error('Failed to start backend:');
+  console.error(error.message || error);
+  process.exit(1);
 });
