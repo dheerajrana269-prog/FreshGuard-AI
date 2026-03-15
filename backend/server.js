@@ -5,7 +5,11 @@ import scanRoutes from './routes/scanRoutes.js';
 import { connectDB } from './config/db.js';
 import { loadEnv } from './config/env.js';
 
+import dotenv from 'dotenv';
+
 loadEnv();
+
+dotenv.config();
 
 const app = express();
 app.use(cors());

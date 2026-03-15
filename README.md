@@ -84,6 +84,9 @@ npm run dev
 If you run the backend from the repository root, env loading still works because the server now resolves `backend/.env` explicitly.
 
 
+npm run dev
+```
+
 ### 3) AI Service
 ```bash
 cd ai-service
